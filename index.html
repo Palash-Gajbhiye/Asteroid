@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    #startButton {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+  <title>YouTube Video Player with Timer</title>
+</head>
+<body>
+
+<button id="startButton" onclick="startTimer()">Asteroid Girao</button>
+
+<script>
+  function startTimer() {
+    var button = document.getElementById("startButton");
+    button.disabled = true; // Disable the button during the timer
+
+    var seconds = 5;
+    button.innerText = seconds + " seconds remaining";
+
+    var countdown = setInterval(function() {
+      seconds--;
+      button.innerText = seconds + " seconds remaining";
+
+      if (seconds <= 0) {
+        clearInterval(countdown);
+        playYouTubeVideo();
+      }
+    }, 1000); // Update every 1000 milliseconds (1 second)
+  }
+
+  function playYouTubeVideo() {
+    // Replace 'VIDEO_ID' with the actual YouTube video ID
+    var videoId = 'VNtsVP42bOE?si=P8QBN3ga-ovQcArB';
+    var embedUrl = 'https://www.youtube.com/embed/' + videoId + '?autoplay=1';
+
+    var iframe = document.createElement('iframe');
+    iframe.setAttribute('width', '100%');
+    iframe.setAttribute('height', '100%');
+    iframe.setAttribute('src', embedUrl);
+    iframe.setAttribute('allowfullscreen', '');
+    iframe.setAttribute('frameborder', '0');
+
+    var fullscreenDiv = document.createElement('div');
+    fullscreenDiv.setAttribute('style', 'position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: black; z-index: 9999;');
+    fullscreenDiv.appendChild(iframe);
+
+    document.body.appendChild(fullscreenDiv);
+  }
+</script>
+
+</body>
+</html>
